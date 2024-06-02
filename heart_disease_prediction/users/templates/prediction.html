@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='prediction.css') }}">
+</head>
+<body>
+    <div class="top">      
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+    </div>
+
+    <div class="container custom-bg">
+        <form action="{{ url_for('predict') }}" method="POST">
+            <p2>Based on medical-evaluated data, please fill out this form:</p2>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+            <label for="sex">Gender:</label>
+            <select name="sex">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select><br><br>
+
+            <label for="cp">Chest Pain Type:</label>
+            <select id="cp" name="cp">
+                <option value="0">None</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
+            </select><br>
+            
+            <label for="trestbps">Resting Blood Pressure:</label>
+            <input type="number" name="trestbps" placeholder="Enter resting blood pressure" required><br><br>
+            
+
+            <label for="chol">Cholesterol:</label>
+            <input type="number" name="chol" placeholder="Enter cholesterol level" required><br><br>
+
+
+            <label for="fbs">Fasting Blood Sugar > 120 mg/dl:</label>
+            <input type="radio" name="fbs" value="1" required> Yes
+            <input type="radio" name="fbs" value="0"> No<br><br>
+
+            <label for="restecg">Resting Electrocardiographic Results:</label>
+            <select id="restecg" name="restecg">
+                <option value="0">Normal</option>
+                <option value="1">Abnormality in ST-T wave</option>
+                <option value="2">Showing probable or definite left ventricular hypertrophy</option>
+            </select><br>
+
+            <label for="thalach">Maximum Heart Rate Achieved:</label>
+            <input type="number" name="thalach" placeholder="Enter maximum heart rate achieved" required><br><br>
+            
+
+            <label for="exang">Exercise Induced Angina:</label>
+            <input type="radio" name="exang" value="1" required> Yes
+            <input type="radio" name="exang" value="0"> No<br><br>
+
+            <label for="oldpeak">ST Depression Induced by Exercise:</label>
+            <input type="number" id="oldpeak" name="oldpeak" step="any" placeholder="Enter ST Depression...">
+
+            <label for="slope">Slope of the Peak Exercise ST Segment:</label>
+            <select id="slope" name="slope">
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+            </select><br>
+
+            <label for="ca">Number of Major Vessels Colored by Fluoroscopy :</label>
+            <select id="ca" name="ca" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select><br><br>
+
+            <label for="thal">Thalassemia:</label>
+            <select id="thal" name="thal" required>
+                <option value="0">Normal</option>
+                <option value="1">Mild</option>
+                <option value="2">Moderate</option>
+                <option value="3">Severe</option>
+            </select><br><br>
+
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+        <!-- Footer with buttons -->
+        <div class="footer">
+            <a href="{{ url_for('index') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/home.png') }}" alt="index Icon">
+            </a>
+            <a href="{{ url_for('predict') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/heart-rate.png') }}" alt="Heart Icon">
+            </a>
+            <a href="{{ url_for('history') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/file.png') }}" alt="history Icon">
+            </a>
+            <a href="{{ url_for('feedback_form') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/feedback.png') }}" alt="Feedback Icon">
+            </a> 
+            <a href="{{ url_for('settings') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/settings.png') }}" alt="Settings Icon">
+            </a>
+        </div>
+</body>
+</html>

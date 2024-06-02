@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script>
+        function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === "none") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+        {% if not current_user.is_authenticated %}
+        <div class="auth-links">
+            <button class="auth-button" onclick="window.location.href='{{ url_for('login') }}'">Sign In</button>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="plot-container">
+        <h2>Correlation Heatmap</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['correlation_heatmap'] }}" alt="Correlation Heatmap">
+        <p>This heatmap shows the correlation between different features in the dataset. Darker colors indicate higher correlation.</p>
+        <button onclick="toggleDetails('details_correlation_heatmap')">More Info</button>
+        <div id="details_correlation_heatmap" style="display: none;">
+            <p>Correlation heatmaps are useful for understanding the relationships between multiple variables. 
+            In this heatmap, each cell represents the correlation coefficient between two variables, with darker 
+            colors indicating stronger correlations. Positive correlations suggest that as one variable increases, 
+            the other tends to increase as well, while negative correlations indicate an inverse relationship.</p>
+            <p>Understanding these correlations can help in identifying which features are most influential in predicting heart disease. 
+            For instance, if cholesterol levels have a high positive correlation with the target variable, it suggests that higher cholesterol 
+            levels might be associated with a higher risk of heart disease. This information is crucial for feature selection and engineering in predictive modeling.</p>
+        </div>
+    </div>
+
+    {% for feature, plot in plots.items() %}
+        {% if 'countplot_' in feature %}
+            <div class="plot-container">
+                <h2>Count Plot: {{ feature.split('_')[-1] }}</h2>
+                <img class="plot" src="data:image/png;base64,{{ plot }}" alt="Count Plot: {{ feature.split('_')[-1] }}">
+                <p>This count plot shows the distribution of the {{ feature.split('_')[-1] }} feature across the dataset.</p>
+                <button onclick="toggleDetails('details_{{ feature }}')">More Info</button>
+                <div id="details_{{ feature }}" style="display: none;">
+                    <p>Count plots are useful for visualizing the distribution of categorical data. 
+                    They provide a clear view of how many instances of each category are present in the dataset, 
+                    which can be helpful in identifying imbalances and understanding the overall composition of the data.</p>
+                    <p>For example, in a dataset concerning heart disease, the count plot for gender might show a higher number of male 
+                    patients compared to female patients. Such imbalances can influence the outcomes of predictive models and must be considered 
+                    during the data preprocessing and analysis stages.</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="plot-container">
+        <h2>Boxplot: Age vs. Target</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['boxplot_age_vs_target'] }}" alt="Boxplot: Age vs. Target">
+        <p>This boxplot illustrates the distribution of ages for patients with and without heart disease.</p>
+        <button onclick="toggleDetails('details_boxplot_age_vs_target')">More Info</button>
+        <div id="details_boxplot_age_vs_target" style="display: none;">
+            <p>Boxplots are a standardized way of displaying the distribution of data based on a five-number summary: 
+            minimum, first quartile (Q1), median, third quartile (Q3), and maximum. They are particularly useful for 
+            comparing distributions between different groups. In this boxplot, we compare the age distribution between 
+            patients with and without heart disease, which helps in identifying any noticeable age-related trends.</p>
+            <p>By analyzing this boxplot, we can observe if older or younger populations are more likely to have heart disease. 
+            This information can be valuable for healthcare professionals when considering age as a risk factor in their diagnosis and treatment plans. 
+            Outliers can also provide insights into unusual cases that may warrant further investigation.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Distribution of Cholesterol</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['histplot_cholesterol'] }}" alt="Distribution of Cholesterol">
+        <p>This histogram shows the distribution of cholesterol levels in the dataset.</p>
+        <button onclick="toggleDetails('details_histplot_cholesterol')">More Info</button>
+        <div id="details_histplot_cholesterol" style="display: none;">
+            <p>Histograms provide a graphical representation of the distribution of a dataset. 
+            They are useful for understanding the frequency distribution of numerical data by 
+            showing the number of data points that fall within a range of values (bins). 
+            In this histogram, we visualize the cholesterol levels of patients to identify common ranges and outliers.</p>
+            <p>High cholesterol is a known risk factor for heart disease, and this histogram helps in assessing the prevalence 
+            of high cholesterol levels among the patient population. Identifying the range within which most cholesterol levels fall 
+            can help in setting clinical thresholds for further testing and treatment. Moreover, it can highlight extreme values that 
+            may require immediate medical attention.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Distribution of Maximum Heart Rate Achieved</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['histplot_max_heart_rate'] }}" alt="Distribution of Maximum Heart Rate Achieved">
+        <p>This histogram illustrates the distribution of the maximum heart rate achieved by patients.</p>
+        <button onclick="toggleDetails('details_histplot_max_heart_rate')">More Info</button>
+        <div id="details_histplot_max_heart_rate" style="display: none;">
+            <p>This histogram shows how the maximum heart rate achieved varies among patients. 
+            Understanding the distribution of maximum heart rates can help in assessing the overall cardiovascular health 
+            of the patients, and in identifying any unusual values that may indicate potential health issues.</p>
+            <p>Max heart rate is often used in stress testing to evaluate the heart's response to physical activity. 
+            Analyzing this distribution can reveal insights into the fitness levels and cardiovascular performance of the 
+            patient population. It can also help in identifying patients who may have abnormal heart rate responses, which could 
+            signal underlying heart conditions.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Scatter Plot: Age vs. Cholesterol</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['scatterplot_age_vs_cholesterol'] }}" alt="Scatter Plot: Age vs. Cholesterol">
+        <p>This scatter plot shows the relationship between age and cholesterol levels.</p>
+        <button onclick="toggleDetails('details_scatterplot_age_vs_cholesterol')">More Info</button>
+        <div id="details_scatterplot_age_vs_cholesterol" style="display: none;">
+            <p>Scatter plots are used to observe relationships between two continuous variables. 
+            Each point on the scatter plot represents an individual patient's age and cholesterol level. 
+            Analyzing this plot can reveal trends, clusters, and outliers, helping to understand how cholesterol levels vary with age.</p>
+            <p>By examining the pattern of data points, we can determine if there's a correlation between age and cholesterol levels. 
+            This can provide insights into whether cholesterol management should be prioritized more heavily at certain ages. 
+            Outliers may indicate individuals with unusually high or low cholesterol levels for their age, which could require further medical investigation.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Violin Plot: Age Distribution by Target</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['violinplot_age_by_target'] }}" alt="Violin Plot: Age Distribution by Target">
+        <p>This violin plot visualizes the age distribution for patients with and without heart disease.</p>
+        <button onclick="toggleDetails('details_violinplot_age_by_target')">More Info</button>
+        <div id="details_violinplot_age_by_target" style="display: none;">
+            <p>Violin plots combine aspects of boxplots and density plots. They provide a richer understanding of the distribution of the data. 
+            In this plot, we compare the age distributions between patients with and without heart disease, 
+            highlighting not only the summary statistics but also the density of data points at different age levels.</p>
+            <p>By analyzing the shape and spread of the violin plot, we can identify whether certain age groups are more prone to heart disease. 
+            The width of the violin plot at any given age indicates the relative density of patients at that age. 
+            This helps in recognizing the most common age groups for heart disease and can guide targeted preventive measures and interventions.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Bar Plot: Chest Pain Type vs. Target</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['barplot_cp_vs_target'] }}" alt="Bar Plot: Chest Pain Type vs. Target">
+        <p>This bar plot shows the relationship between chest pain types and heart disease occurrence.</p>
+        <button onclick="toggleDetails('details_barplot_cp_vs_target')">More Info</button>
+        <div id="details_barplot_cp_vs_target" style="display: none;">
+            <p>Bar plots are effective for comparing categorical data. In this plot, we examine the different types of chest pain 
+            (e.g., typical angina, atypical angina, non-anginal pain, and asymptomatic) and their association with the presence of heart disease.</p>
+            <p>Understanding the distribution of chest pain types among patients with and without heart disease can help in clinical diagnosis. 
+            Certain types of chest pain might be more indicative of heart disease, and this plot helps in visualizing these trends. 
+            This information can be crucial for doctors when assessing patients presenting with chest pain.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Scatter Plot: Age vs. Resting Blood Pressure</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['scatterplot_age_vs_trestbps'] }}" alt="Scatter Plot: Age vs. Resting Blood Pressure">
+        <p>This scatter plot illustrates the relationship between age and resting blood pressure.</p>
+        <button onclick="toggleDetails('details_scatterplot_age_vs_trestbps')">More Info</button>
+        <div id="details_scatterplot_age_vs_trestbps" style="display: none;">
+            <p>This scatter plot allows us to explore how resting blood pressure varies with age. 
+            Each point represents a patient's age and their corresponding resting blood pressure measurement. 
+            This visualization helps in identifying patterns or trends in the data.</p>
+            <p>Resting blood pressure is a critical measure in cardiovascular health. 
+            Analyzing its relationship with age can help in understanding how blood pressure changes as people age, 
+            which is essential for diagnosing and managing hypertension and related conditions. Outliers may indicate patients 
+            with unusually high or low blood pressure for their age, requiring further clinical attention.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Violin Plot: Fasting Blood Sugar vs. Target</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['violinplot_fbs_by_target'] }}" alt="Violin Plot: Fasting Blood Sugar vs. Target">
+        <p>This violin plot shows the distribution of fasting blood sugar levels for patients with and without heart disease.</p>
+        <button onclick="toggleDetails('details_violinplot_fbs_by_target')">More Info</button>
+        <div id="details_violinplot_fbs_by_target" style="display: none;">
+            <p>In this violin plot, we observe the distribution of fasting blood sugar levels for both groups. 
+            The plot provides insights into the spread and concentration of fasting blood sugar levels among patients, 
+            which can be important for diagnosing and managing diabetes and related conditions.</p>
+            <p>Higher fasting blood sugar levels are often associated with an increased risk of heart disease. 
+            This plot helps in visualizing whether patients with heart disease tend to have higher fasting blood sugar levels compared 
+            to those without heart disease. Such insights can inform both preventive measures and treatment strategies for patients 
+            at risk of diabetes and cardiovascular diseases.</p>
+        </div>
+    </div>
+
+    <div class="plot-container">
+        <h2>Pairplot</h2>
+        <img class="plot" src="data:image/png;base64,{{ plots['pairplot'] }}" alt="Pairplot">
+        <p>This pairplot shows the pairwise relationships between different features in the dataset.</p>
+        <button onclick="toggleDetails('details_pairplot')">More Info</button>
+        <div id="details_pairplot" style="display: none;">
+            <p>Pairplots are useful for visualizing the relationships between multiple variables simultaneously. 
+            Each plot on the diagonal shows the distribution of a single variable, while the other plots show the scatter plots of variable pairs. 
+            This helps in identifying patterns, correlations, and potential anomalies across the dataset.</p>
+            <p>By examining pairplots, we can detect linear and non-linear relationships between features, 
+            which can be critical for feature selection and engineering in predictive modeling. 
+            This comprehensive visualization provides a deeper understanding of the interactions between variables, 
+            which is essential for building robust and accurate predictive models.</p>
+        </div>
+    </div>
+    
+    <form action="{{ url_for('index') }}" method="POST"></form>
+        <!-- Footer with buttons -->
+        <div class="footer">
+            <a href="{{ url_for('index') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/home.png') }}" alt="index Icon">
+            </a>
+            <a href="{{ url_for('predict') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/heart-rate.png') }}" alt="Heart Icon">
+            </a>
+            <a href="{{ url_for('history') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/file.png') }}" alt="history Icon">
+            </a>
+            <a href="{{ url_for('feedback_form') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/feedback.png') }}" alt="Feedback Icon">
+            </a>            
+            <a href="{{ url_for('settings') }}" class="footer-button">
+                <img src="{{ url_for('static', filename='logo/settings.png') }}" alt="Settings Icon">
+            </a>
+        </div>
+</body>
+</html>

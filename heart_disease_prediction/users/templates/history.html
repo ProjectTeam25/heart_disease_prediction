@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+    <div class="top">      
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+    </div>
+    <div class="container">
+        <h1>Prediction History</h1>
+        <form action="{{ url_for('history') }}" method="GET">
+        </form>
+        {% if history %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Chest Pain Type (cp)</th>
+                        <th>Resting Blood Pressure (trestbps)</th>
+                        <th>Serum Cholesterol (chol)</th>
+                        <th>Fasting Blood Sugar (fbs)</th>
+                        <th>Resting ECG (restecg)</th>
+                        <th>Max Heart Rate (thalach)</th>
+                        <th>Exercise Induced Angina (exang)</th>
+                        <th>ST Depression (oldpeak)</th>
+                        <th>Slope</th>
+                        <th>Major Vessels (ca)</th>
+                        <th>Thalassemia (thal)</th>
+                        <th>Prediction</th>
+                        <th>Prediction Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in history %}
+                        <tr>
+                            <td>{{ entry.age }}</td>
+                            <td>{{ entry.gender }}</td>
+                            <td>{{ entry.cp }}</td>
+                            <td>{{ entry.trestbps }}</td>
+                            <td>{{ entry.chol }}</td>
+                            <td>{{ entry.fbs }}</td>
+                            <td>{{ entry.restecg }}</td>
+                            <td>{{ entry.thalach }}</td>
+                            <td>{{ entry.exang }}</td>
+                            <td>{{ entry.oldpeak }}</td>
+                            <td>{{ entry.slope }}</td>
+                            <td>{{ entry.ca }}</td>
+                            <td>{{ entry.thal }}</td>
+                            <td>{{ entry.prediction }}</td>
+                            <td>{{ entry.prediction_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No prediction history found.</p>
+        {% endif %}
+    </div>
+</div>
+<!-- Footer with buttons -->
+<div class="footer">
+    <a href="{{ url_for('index') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/home.png') }}" alt="index Icon">
+    </a>
+    <a href="{{ url_for('predict') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/heart-rate.png') }}" alt="Heart Icon">
+    </a>
+    <a href="{{ url_for('history') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/file.png') }}" alt="history Icon">
+    </a>
+    <a href="{{ url_for('feedback_form') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/feedback.png') }}" alt="Feedback Icon">
+    </a> 
+    <a href="{{ url_for('settings') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/settings.png') }}" alt="Settings Icon">
+    </a>
+</div>
+</body>
+</html>

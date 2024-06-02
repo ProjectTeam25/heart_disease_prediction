@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="top">      
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+    </div>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <button onclick="showSection('user-details')">User Details</button>
+            <button onclick="showSection('feedbacks')">Feedbacks</button>
+        </nav>
+
+        <div id="user-details" class="section" style="display: none;">
+            <h2>User Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serial Number</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ 'Active' if user.active else 'Inactive' }}</td>
+                        <td>
+                            <a href="{{ url_for('change_password', user_id=user.id) }}">Change Password</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="feedbacks" class="section" style="display: none;">
+            <h2>User Feedbacks</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serial Number</th>
+                        <th>User Email</th>
+                        <th>Feedback</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feedback in feedbacks %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ feedback.email }}</td>
+                        <td>{{ feedback.feedback }}</td>
+                        <td>{{ feedback.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Display the User Details section by default
+        showSection('user-details');
+    </script>
+</body>
+</html>

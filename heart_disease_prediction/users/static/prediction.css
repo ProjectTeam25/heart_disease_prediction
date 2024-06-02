@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+}
+
+.container {
+    max-width: 600px;
+    margin: 150px auto 100px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.top {
+    background-color: #0e0e1a;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.top img {
+    width: 72px;
+    height: 66px;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+}
+
+p {
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+p2 {
+    background-color: #d4edda; 
+    color: #155724;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px; 
+    width: 100%; 
+    box-sizing: border-box;
+    text-align: center;
+    display: block; 
+}
+
+.top p {
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="number"],
+select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 13px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 20%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    z-index: 2;
+}
+
+.footer-button {
+    margin: 0 15px;
+}
+
+.footer-button img {
+    width: 30px;
+    height: 30px;
+}
