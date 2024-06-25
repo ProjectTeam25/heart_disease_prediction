@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}">
+</head>
+<body>
+    <div class="top">      
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+    </div>
+    <div class="container">
+        <h1>User Settings</h1>
+        <!-- Profile Logo -->
+        <div class="profile-logo">
+            <img src="{{ url_for('static', filename='logo/user.png') }}" alt="Profile Logo">
+        </div>
+        <div class="settings-options">
+            <h2>Settings</h2>
+            <ul>
+                <li><a href="{{ url_for('change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('deactivate_account') }}">Deactivate Account</a></li>
+            </ul>
+        </div>
+        <!-- Logout option -->
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+    </div>
+    <!-- Footer with buttons -->
+<div class="footer">
+    <a href="{{ url_for('index') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/home.png') }}" alt="index Icon">
+    </a>
+    <a href="{{ url_for('predict') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/heart-rate.png') }}" alt="Heart Icon">
+    </a>
+    <a href="{{ url_for('history') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/file.png') }}" alt="history Icon">
+    </a>
+    <a href="{{ url_for('feedback_form') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/feedback.png') }}" alt="Feedback Icon">
+    </a> 
+    <a href="{{ url_for('settings') }}" class="footer-button">
+        <img src="{{ url_for('static', filename='logo/settings.png') }}" alt="Settings Icon">
+    </a>
+</div>
+</body>
+</html>

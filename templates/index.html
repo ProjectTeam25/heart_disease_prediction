@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="top">
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+        {% if not current_user.is_authenticated %}
+        <div class="auth-links">
+            <button class="auth-button" onclick="window.location.href='{{ url_for('login') }}'">Sign In</button>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="content">
+        <h1>Understanding Heart Disease</h1>
+        <p>Heart disease refers to various types of conditions that affect the heart. These include:</p>
+        <ul>
+            <li>Coronary artery disease (CAD)</li>
+            <li>Heart attack</li>
+            <li>Heart failure</li>
+            <li>Arrhythmias</li>
+            <li>Heart valve disease</li>
+        </ul>
+        <p>Heart disease is a leading cause of death worldwide, but it is preventable and manageable with lifestyle changes, medication, and medical interventions. Understanding the different types of heart disease and their symptoms is crucial for early detection and treatment. Knowing the risk factors, such as high blood pressure, high cholesterol, smoking, obesity, and a sedentary lifestyle, can help in taking proactive steps to reduce the risk. Regular check-ups and screenings can help detect heart disease early, allowing for timely treatment and management.</p>
+
+        <h2>Types of Heart Disease</h2>
+
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='logo/1.jpg') }}" alt="Coronary Artery Disease" class="info-image">
+            <div class="info-text">
+                <h3>Coronary Artery Disease (CAD)</h3>
+                <p>CAD is the most common type of heart disease. It occurs when the arteries that supply blood to the heart muscle become narrowed or blocked due to plaque buildup. This can lead to chest pain (angina), heart attacks, and other complications. Treatment for CAD often involves lifestyle changes, medications, and in some cases, surgical procedures such as angioplasty or coronary artery bypass grafting (CABG). Regular monitoring and management of risk factors, such as high blood pressure, high cholesterol, and diabetes, are essential for preventing complications.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='logo/2.jpg') }}" alt="Heart Attack" class="info-image">
+            <div class="info-text">
+                <h3>Heart Attack</h3>
+                <p>A heart attack happens when the blood flow to a part of the heart is blocked for a long enough time that part of the heart muscle is damaged or dies. This is usually caused by a blockage in one or more of the coronary arteries. Symptoms of a heart attack can include chest pain, shortness of breath, nausea, and sweating. Immediate medical attention is crucial to restore blood flow and minimize damage to the heart muscle. Treatments may include medications, lifestyle changes, and procedures such as angioplasty or stent placement.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='logo/3.jpg') }}" alt="Heart Failure" class="info-image">
+            <div class="info-text">
+                <h3>Heart Failure</h3>
+                <p>Heart failure occurs when the heart is unable to pump blood effectively. This can result from a variety of conditions, including CAD, high blood pressure, and previous heart attacks. Symptoms include shortness of breath, fatigue, and swelling in the legs and ankles. Management of heart failure involves lifestyle changes, medications, and sometimes devices or surgical procedures to help the heart pump more effectively. It's important to monitor and manage the underlying conditions that contribute to heart failure and to follow a treatment plan to improve quality of life.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='logo/4.jpg') }}" alt="Arrhythmias" class="info-image">
+            <div class="info-text">
+                <h3>Arrhythmias</h3>
+                <p>Arrhythmias are irregular heartbeats. They occur when the electrical impulses that coordinate your heartbeats don't work properly, causing your heart to beat too fast, too slow, or irregularly. This can lead to various symptoms and complications. Treatments for arrhythmias can include medications, lifestyle changes, and medical procedures such as cardioversion, ablation, or the implantation of a pacemaker or defibrillator. Identifying and managing the underlying causes of arrhythmias, such as heart disease or electrolyte imbalances, is crucial for effective treatment.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='logo/5.jpg') }}"  alt="Heart Valve Disease" class="info-image">
+            <div class="info-text">
+                <h3>Heart Valve Disease</h3>
+                <p>Heart valve disease occurs when one or more of the heart's valves don't work properly. This can disrupt blood flow through the heart and lead to various symptoms and complications. Symptoms can include shortness of breath, fatigue, and swelling in the legs and ankles. Treatment for heart valve disease may involve medications, lifestyle changes, and surgical procedures such as valve repair or replacement. Early diagnosis and treatment are key to preventing complications and improving outcomes.</p>
+            </div>
+        </div>
+
+        <h2>Prevention and Management</h2>
+        <p>Preventing heart disease involves making healthy lifestyle choices, such as eating a balanced diet, exercising regularly, avoiding tobacco, and managing stress. Regular medical check-ups and managing conditions like high blood pressure, high cholesterol, and diabetes are also crucial. Engaging in regular physical activity, maintaining a healthy weight, and following a heart-healthy diet can significantly reduce the risk of heart disease. Additionally, avoiding tobacco products and limiting alcohol intake can further protect heart health. Stress management techniques, such as mindfulness, meditation, and yoga, can help reduce the impact of stress on the heart.</p>
+
+        <div class="prevention-section">
+            <h3>Healthy Lifestyle Tips</h3>
+            <ul>
+                <li>Eat a heart-healthy diet: Focus on fruits, vegetables, whole grains, and lean proteins. Reduce the intake of saturated fats, trans fats, sodium, and added sugars.</li>
+                <li>Exercise regularly: Aim for at least 30 minutes of moderate exercise most days of the week. Activities such as walking, jogging, cycling, and swimming can improve heart health.</li>
+                <li>Avoid tobacco: Smoking is a major risk factor for heart disease. Quitting smoking can significantly reduce the risk of heart disease and improve overall health.</li>
+                <li>Manage stress: Practice relaxation techniques such as meditation, yoga, or deep breathing exercises. Engaging in hobbies and spending time with loved ones can also help reduce stress.</li>
+                <li>Monitor your health: Regular check-ups with your healthcare provider can help catch and manage risk factors early. Monitoring blood pressure, cholesterol levels, and blood sugar levels is essential for maintaining heart health.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer with buttons -->
+    <div class="footer">
+        <a href="{{ url_for('index') }}" class="footer-button">
+            <img src="{{ url_for('static', filename='logo/home.png') }}" alt="index Icon">
+        </a>
+        <a href="{{ url_for('predict') }}" class="footer-button">
+            <img src="{{ url_for('static', filename='logo/heart-rate.png') }}" alt="Heart Icon">
+        </a>
+        <a href="{{ url_for('history') }}" class="footer-button">
+            <img src="{{ url_for('static', filename='logo/file.png') }}" alt="history Icon">
+        </a>
+        <a href="{{ url_for('feedback_form') }}" class="footer-button">
+            <img src="{{ url_for('static', filename='logo/feedback.png') }}" alt="Feedback Icon">
+        </a>            
+        <a href="{{ url_for('settings') }}" class="footer-button">
+            <img src="{{ url_for('static', filename='logo/settings.png') }}" alt="Settings Icon">
+        </a>
+    </div>
+</body>
+</html>

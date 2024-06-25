@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500&family=Raleway:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", ui-system, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+.top {
+    background-color: #0e0e1a;
+    width: 100%;
+    height: 110px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.top img {
+    width: 72px;
+    height: 66px;
+    position: absolute;
+    top: 16%;
+    left: 34%;
+}
+
+.top p {
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    top: 34%;
+    margin-left: 15%;
+    left: 25%;
+}
+
+.top a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    position: absolute;
+    top: 40%;
+    left: 72%;
+}
+
+.top a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.wrapper h1 {
+    margin-left: 17%;
+    width: 400px;
+    font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 30px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.wrapper h2 {
+    text-align: center;
+    color: #fff;
+    background-color: #2a2b33;
+    margin-left: 17%;
+    padding: 8px;
+    width: 610px;
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.wrapper {
+    margin-left: 25%;
+    margin-right: 14%;
+}
+
+.card i {
+    margin-right: 10px;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.card .left {
+    margin-left: -9%;
+    margin-top: 2%;
+}
+
+.card .right {
+    margin-left: 100%;
+}
+
+.card p {
+    text-transform: uppercase;
+    border: 4px solid black;
+    margin-top: 20px;
+    margin-left: 17%;
+    width: 600px;
+    font-size: 17px;
+    background-color: white;
+    color: red;
+    padding: 0 10%;
+    border-radius: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    margin-left: 15%;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deactivate Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='deactivate_account.css') }}">
+</head>
+<body>
+    <div class="top">      
+        <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo">
+        <p>Heart Disease Prediction</p>
+    </div>
+    <div class="container">
+        <h1>Deactivate Account</h1>
+        <form action="{{ url_for('deactivate_account') }}" method="POST">
+            <input type="password" name="password" placeholder="Enter Your Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Your Password" required>
+            <button type="submit">Deactivate Account</button>
+        </form>
+    </div>
+</body>
+</html>
